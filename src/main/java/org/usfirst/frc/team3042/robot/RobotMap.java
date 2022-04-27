@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3042.robot;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.revrobotics.CANSparkMax.IdleMode;
 
 import org.usfirst.frc.team3042.lib.Log;
@@ -17,44 +16,10 @@ public class RobotMap {
     public static final double WHEEL_BASE = 0.517525; // Distance between centers of front and back wheels on robot (in meters) 
 
 	/** CAN ID numbers ********************************************************/
-	public static final int CAN_TOP_CONVEYOR = 15;
-	public static final int CAN_RIGHT_CONVEYOR = 32;
-	public static final int CAN_LEFT_CONVEYOR = 25;
-	public static final int CAN_RIGHT_CLIMBER = 13;
-	public static final int CAN_LEFT_CLIMBER = 27;
 	public static final int CAN_LEFT_FRONT_MOTOR = 3;
 	public static final int CAN_RIGHT_FRONT_MOTOR = 4;
 	public static final int CAN_LEFT_BACK_MOTOR = 5;
 	public static final int CAN_RIGHT_BACK_MOTOR = 2;
-	public static final int CAN_INTAKE = 8;
-	public static final int CAN_TRAVERSAL_MOTOR = 10;
-
-	/** PCM channels **********************************************************/
-	public static final int INTAKE_SOLENOID = 1;
-	public static final int CLIMBER_SOLENOID = 2; 
-	
-	/** DIO channels **********************************************************/
-	public static final int DIO_LIMITSWITCH_CONVEYOR = 1;
-	public static final int DIO_LIMITSWITCH_CLIMBER_RIGHT = 3;
-	public static final int DIO_LIMITSWITCH_CLIMBER_LEFT = 5;
-
-	/** Climber Settings ******************************************************/
-	public static final boolean REVERSE_RIGHT_CLIMBER = true;
-	public static final boolean REVERSE_LEFT_CLIMBER = false;
-	public static final boolean REVERSE_TRAVERSAL_CLIMBER = false;
-	public static final NeutralMode CLIMBER_BRAKE_MODE = NeutralMode.Brake;
-	public static final IdleMode TRAVERSAL_CLIMBER_BRAKE_MODE = IdleMode.kBrake;
-	public static final double CLIMBER_POWER = 0.7; // How much power (as a %) to give the climbing hooks
-	public static final double TRAVERSAL_CLIMBER_POWER = 0.7; // How much power (as a %) to give the traversal climber
-	public static final double TRAVERSAL_GOAL_POSITION = 120;
-	
-	/** Conveyor Settings *****************************************************/
-	public static final boolean REVERSE_TOP_CONVEYOR = false;
-	public static final boolean REVERSE_RIGHT_CONVEYOR = true;
-	public static final boolean REVERSE_LEFT_CONVEYOR = false;
-	public static final NeutralMode CONVEYOR_BRAKE_MODE = NeutralMode.Brake;
-	public static final double CONVEYOR_POWER = 0.8; // How much power (as a %) to give the conveyor
-	public static final double CONVEYOR_ADVANCE_POWER = 0.4; // How much power (as a %) to give the conveyor
 
 	/** Drivetrain Settings ***************************************************/
 	public static final IdleMode DRIVETRAIN_BRAKE_MODE = IdleMode.kBrake;
@@ -82,11 +47,6 @@ public class RobotMap {
 	public static final double kD_GYRO = 0.015;
 	public static final double ANGLE_TOLERANCE = 2.0;
 	public static final double MAX_POWER_GYRO = 0.4;
-
-	/** Intake Settings *******************************************************/
-	public static final boolean REVERSE_INTAKE = true;
-	public static final NeutralMode INTAKE_BRAKE_MODE = NeutralMode.Brake;
-	public static final double INTAKE_POWER = 0.95; // How much power (as a %) to give the intake	
 	
 	/** USB ports *************************************************************/					
 	public static final int USB_JOYSTICK_LEFT 	= 0;
@@ -107,9 +67,5 @@ public class RobotMap {
 	public static final Log.Level	LOG_POV_BUTTON						= Log.Level.ERROR;
 	
 	/** Subsystems ************************************************************/
-	public static final Log.Level	LOG_CLIMBER							= Log.Level.DEBUG;
-	public static final Log.Level	LOG_CLIMBER_TRAVERSAL				= Log.Level.DEBUG;
-	public static final Log.Level	LOG_CONVEYOR						= Log.Level.DEBUG;
 	public static final Log.Level	LOG_DRIVETRAIN						= Log.Level.TRACE;
-	public static final Log.Level	LOG_INTAKE							= Log.Level.DEBUG;
 }
