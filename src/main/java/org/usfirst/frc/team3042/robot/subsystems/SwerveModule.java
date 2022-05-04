@@ -1,9 +1,11 @@
 package org.usfirst.frc.team3042.robot.subsystems;
 
 import com.ctre.phoenix.sensors.CANCoder;
+
 import com.revrobotics.AnalogInput;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -32,34 +34,21 @@ public class SwerveModule {
         driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless);
         turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);
 
+        driveMotor.restoreFactoryDefaults();
+        turningMotor.restoreFactoryDefaults();
+
         driveMotor.setInverted(driveMotorReversed);
         turningMotor.setInverted(turningMotorReversed);
+
+        driveMotor.setIdleMode(IdleMode.kBrake);
+        turningMotor.setIdleMode(IdleMode.kBrake);
 
         driveEncoder = driveMotor.getEncoder();
         turningEncoder = turningMotor.getEncoder();
         
-
-        driveEncoder.setPositionConversionFactor(factor);
-        driveEncoder.setVelocityConversionFactor(factor);
-        turningEncoder.setPositionConversionFactor(factor);
-        turningEncoder.setVelocityConversionFactor(factor);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        driveEncoder.setPositionConversionFactor(factor); //TODO: Make this factor variable in RobotMap
+        driveEncoder.setVelocityConversionFactor(factor); //TODO: Make this factor variable in RobotMap
+        turningEncoder.setPositionConversionFactor(factor); //TODO: Make this factor variable in RobotMap
+        turningEncoder.setVelocityConversionFactor(factor); //TODO: Make this factor variable in RobotMap
     }
-
 }
