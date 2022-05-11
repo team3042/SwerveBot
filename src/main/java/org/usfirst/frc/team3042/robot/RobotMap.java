@@ -41,6 +41,15 @@ public class RobotMap {
 	public static final double kMAX_ANGULAR_SPEED_RADIANS_PER_SECOND = 2*Math.PI;
 	public static final double kMAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED = 2*Math.PI;
 
+	public static final double kDriveEncoderRot2Meter = 0.0;
+	public static final double kDriveEncoderRPM2MeterPerSec = 0.0;
+	public static final double kTurningEncoderRot2Rad = 0.0;
+	public static final double kTurningEncoderRPM2RadPerSec = 0.0;
+	public static final double kPhysicalMaxSpeedMetersPerSecond = 0.0;
+
+	public static final double kPTurning = 0.0;
+
+	
 	/** Drivetrain Gyro Drive Settings ****************************************/
 	public static final double kP_GYRO = 0.01;
 	public static final double kI_GYRO = 0.0;
