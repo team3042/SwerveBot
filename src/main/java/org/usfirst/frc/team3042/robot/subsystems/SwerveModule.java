@@ -33,6 +33,7 @@ public class SwerveModule {
     private final boolean absoluteEncoderReversed;
     private final double absoluteEncoderOffsetRad;
 
+    // SwerveModule object Constructor
     public SwerveModule(int driveMotorId, int turningMotorId, boolean driveMotorReversed, boolean turningMotorReversed,
                         int absoluteEncoderId, double absoluteEncoderOffset, boolean absoluteEncoderReversed) {
 
@@ -66,6 +67,7 @@ public class SwerveModule {
         resetEncoders();
     }
 
+    // Methods for getting the current velocity/position of the motors
     public double getDrivePosition() {
         return driveEncoder.getPosition();
     }
@@ -79,22 +81,26 @@ public class SwerveModule {
         return turningEncoder.getVelocity();
     }
 
+    // Get the absolute position of the module in radians
     public double getAbsoluteEncoderRadians() {
-        double angle = absoluteEncoder.getAbsolutePosition();
-        angle *= (Math.PI / 180);
-        angle -= absoluteEncoderOffsetRad;
-        return angle * (absoluteEncoderReversed ? -1.0 :1.0);
+        double angle = absoluteEncoder.getAbsolutePosition(); // Gets the absolute position in degrees
+        angle *= (Math.PI / 180); // Convert degrees to radians
+        angle -= absoluteEncoderOffsetRad; // Subtract the offset
+        return angle * (absoluteEncoderReversed ? -1.0 : 1.0); // Multiply by -1 if the encoder is reversed
     }
 
+    // Reset the encoders
     public void resetEncoders() {
         driveEncoder.setPosition(0);
         turningEncoder.setPosition(getAbsoluteEncoderRadians());
     }
 
+    // Get the current SwerveModuleState of the module
     public SwerveModuleState getState() {
         return new SwerveModuleState(getDriveVelocity(), new Rotation2d(getTurningPosition()));
     }
 
+    // Set the currently desired SwerveModuleState
     public void setDesiredState(SwerveModuleState state) {
         if (Math.abs(state.speedMetersPerSecond) < 0.001) {
             stop();
@@ -108,6 +114,7 @@ public class SwerveModule {
         SmartDashboard.putString("swerve[" + absoluteEncoder.getDeviceID() + "] state", state.toString());
     }
 
+    // Set 0% power to both motors
     public void stop() {
         driveMotor.set(0);
         turningMotor.set(0);
