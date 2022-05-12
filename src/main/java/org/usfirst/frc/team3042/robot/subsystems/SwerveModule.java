@@ -33,7 +33,7 @@ public class SwerveModule {
     private final boolean absoluteEncoderReversed;
     private final double absoluteEncoderOffsetRad;
 
-    // SwerveModule object Constructor
+    // Construct a new "SwerveModule" object (this method is the constructor)
     public SwerveModule(int driveMotorId, int turningMotorId, boolean driveMotorReversed, boolean turningMotorReversed,
                         int absoluteEncoderId, double absoluteEncoderOffset, boolean absoluteEncoderReversed) {
 
@@ -61,7 +61,7 @@ public class SwerveModule {
         turningEncoder.setPositionConversionFactor(kTurningEncoderRot2Rad); 
         turningEncoder.setVelocityConversionFactor(kTurningEncoderRPM2RadPerSec); 
    
-        turningPidController = new PIDController(RobotMap.kPTurning, 0, 0);
+        turningPidController = new PIDController(RobotMap.kP_Turning, 0, 0); // There is no need for an I term or D term, the P term is enough on its own! :)
         turningPidController.enableContinuousInput(-Math.PI, Math.PI);
 
         resetEncoders();
@@ -109,7 +109,7 @@ public class SwerveModule {
 
         state = SwerveModuleState.optimize(state, getState().angle);
 
-        driveMotor.set(state.speedMetersPerSecond / RobotMap.kPhysicalMaxSpeedMetersPerSecond);// give me PIE
+        driveMotor.set(state.speedMetersPerSecond / RobotMap.kPhysicalMaxSpeedMetersPerSecond);
         turningMotor.set(turningPidController.calculate(getTurningPosition(), state.angle.getRadians()));
         SmartDashboard.putString("swerve[" + absoluteEncoder.getDeviceID() + "] state", state.toString());
     }

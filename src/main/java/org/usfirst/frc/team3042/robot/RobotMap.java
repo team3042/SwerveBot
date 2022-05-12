@@ -4,6 +4,8 @@ import com.revrobotics.CANSparkMax.IdleMode;
 
 import org.usfirst.frc.team3042.lib.Log;
 
+import edu.wpi.first.math.util.Units;
+
 /** RobotMap ******************************************************************
  * The robot configuration file. */
 public class RobotMap {	
@@ -41,14 +43,16 @@ public class RobotMap {
 	public static final double kMAX_ANGULAR_SPEED_RADIANS_PER_SECOND = 2*Math.PI;
 	public static final double kMAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED = 2*Math.PI;
 
-	public static final double kDriveEncoderRot2Meter = 0.0;
-	public static final double kDriveEncoderRPM2MeterPerSec = 0.0;
-	public static final double kTurningEncoderRot2Rad = 0.0;
-	public static final double kTurningEncoderRPM2RadPerSec = 0.0;
-	public static final double kPhysicalMaxSpeedMetersPerSecond = 0.0;
-
-	public static final double kPTurning = 0.0;
-
+	/** Swerve Module Settings ************************************************/
+	public static final double kWheelDiameterMeters = Units.inchesToMeters(4); // Convert wheel diameter in inches to meters
+	public static final double kDriveMotorGearRatio = 1 / 6.75; // Gear Ratio of the Drive Motor
+	public static final double kTurnMotorGearRatio = 1 / 12.8; // Gear Ratio of the Turning Motor
+	public static final double kDriveEncoderRot2Meter = kDriveMotorGearRatio * Math.PI * kWheelDiameterMeters; // Convert rotations to meters
+	public static final double kTurningEncoderRot2Rad = kTurnMotorGearRatio * 2 * Math.PI; // Convert rotations to radians
+	public static final double kDriveEncoderRPM2MeterPerSec = kDriveEncoderRot2Meter / 60; // Convert RPM to meters/second
+	public static final double kTurningEncoderRPM2RadPerSec = kTurningEncoderRot2Rad / 60; // Convert RPM to radians/sec
+	public static final double kPhysicalMaxSpeedMetersPerSecond = Units.feetToMeters(14.5); // Convert max speed from feet/sec to meters/sec
+	public static final double kP_Turning = 1.0; // TODO: We'll probably need to tune this value through testing!
 	
 	/** Drivetrain Gyro Drive Settings ****************************************/
 	public static final double kP_GYRO = 0.01;
