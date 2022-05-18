@@ -40,6 +40,7 @@ public class Drivetrain_GyroTurn extends CommandBase {
 	 * Called just before this Command runs the first time */
 	public void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
+		drivetrain.stopModules();
 		lastError = 0.0;
 		integralError = 0.0;
 		drivetrain.zeroGyro();

@@ -16,7 +16,7 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.util.sendable.SendableRegistry;
 
 /** Drivetrain ****************************************************************
- * The Swerve drivetrain subsystem of the robot. */
+ * The Swerve Drivetrain subsystem of the robot. */
 public class Drivetrain extends SubsystemBase {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN;
@@ -31,7 +31,6 @@ public class Drivetrain extends SubsystemBase {
 		RobotMap.kFrontLeftDriveAbsoluteEncoderPort,
 		RobotMap.kFrontLeftDriveAbsoluteEncoderOffsetRad,
 		RobotMap.kFrontLeftDriveAbsoluteEncoderReversed);
-			
 	private final SwerveModule frontRight = new SwerveModule(
 		RobotMap.kFrontRightDriveMotorPort,
 		RobotMap.kFrontRightTurningMotorPort,
@@ -40,7 +39,6 @@ public class Drivetrain extends SubsystemBase {
 		RobotMap.kFrontRightDriveAbsoluteEncoderPort,
 		RobotMap.kFrontRightDriveAbsoluteEncoderOffsetRad,
 		RobotMap.kFrontRightDriveAbsoluteEncoderReversed);
-		
 	private final SwerveModule backLeft = new SwerveModule(
 		RobotMap.kBackLeftDriveMotorPort,
 		RobotMap.kBackLeftTurningMotorPort,
@@ -49,7 +47,6 @@ public class Drivetrain extends SubsystemBase {
 		RobotMap.kBackLeftDriveAbsoluteEncoderPort,
 		RobotMap.kBackLeftDriveAbsoluteEncoderOffsetRad,
 		RobotMap.kBackLeftDriveAbsoluteEncoderReversed);
-		
 	private final SwerveModule backRight = new SwerveModule(
 		RobotMap.kBackRightDriveMotorPort,
 		RobotMap.kBackRightTurningMotorPort,
@@ -71,11 +68,9 @@ public class Drivetrain extends SubsystemBase {
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
 
 	ADIS16470_IMU gyroscope = new ADIS16470_IMU(); // The gyroscope sensor
-
 	SwerveDriveOdometry odometry = new SwerveDriveOdometry(kDriveKinematics, Rotation2d.fromDegrees(-gyroscope.getAngle()));
 
-	/** Drivetrain ************************************************************
-	 * Setup the motor controllers for desired behavior. */
+	/** Drivetrain Constructor *************************************************/
 	public Drivetrain() {
 		log.add("Constructor", LOG_LEVEL);
 		zeroGyro();
@@ -86,7 +81,7 @@ public class Drivetrain extends SubsystemBase {
 		setDefaultCommand(null);
 	}
 
-	/** Gyroscope Methods *******************************************************/
+	/** Gyroscope Methods ******************************************************/
   	public void zeroGyro() { // Zeroes the heading of the robot
     	gyroscope.reset();
 	}
@@ -118,12 +113,15 @@ public class Drivetrain extends SubsystemBase {
 	public void periodic() {
 		odometry.update(this.getRotation2d(), frontLeft.getState(), frontRight.getState(), backLeft.getState(), backRight.getState());
 	}
+
+	// Stop all 4 swerve modules
 	public void stopModules() {
 		frontLeft.stop();
 		frontRight.stop();
 		backLeft.stop();
 		backRight.stop();
 	}
+	// Update the current desired state of all 4 modules
 	public void setModuleStates(SwerveModuleState[] desiredStates) {
 		SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, RobotMap.kPhysicalMaxSpeedMetersPerSecond);
 		frontLeft.setDesiredState(desiredStates[0]);
@@ -131,20 +129,22 @@ public class Drivetrain extends SubsystemBase {
 		backLeft.setDesiredState(desiredStates[2]);
 		backRight.setDesiredState(desiredStates[3]);
 	}
-	public void drive(double xSpeed, double ySpeed, double zSpeed, boolean fieldOriented){
-		ChassisSpeeds chassisSpeeds;
-		if (fieldOriented) {
-			chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
-				xSpeed, ySpeed, zSpeed, this.getRotation2d());
-		}
-		else {
-			chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, zSpeed);
-		}
-		SwerveModuleState[] moduleStates = kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
+	// Drive the robot with the specified x, y, and rotation speeds
+	public void drive(double xSpeed, double ySpeed, double rotationSpeed, boolean fieldOriented) {
 
+		ChassisSpeeds chassisSpeeds;
+
+		if (fieldOriented) { // Field-Centric Driving
+			chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rotationSpeed, getRotation2d());
+		} else { // Robot-Centric Driving
+			chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, rotationSpeed);
+		}
+
+		SwerveModuleState[] moduleStates = kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
 		setModuleStates(moduleStates);
 	}
 
+	// Provide access to the SwerveModule objects outside of this class
 	public SwerveModule getFrontLeft() {
 		return frontLeft;
 	}

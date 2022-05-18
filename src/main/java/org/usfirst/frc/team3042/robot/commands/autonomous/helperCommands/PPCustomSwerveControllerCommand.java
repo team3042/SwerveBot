@@ -102,9 +102,8 @@ public class PPCustomSwerveControllerCommand extends CommandBase {
 
     @Override
     public void initialize() {
-        PathPlannerState initialState = (PathPlannerState)m_trajectory.sample(0); // Define the initial state of the trajectory
-
-        Robot.drivetrain.resetOdometry(new Pose2d(initialState.poseMeters.getTranslation(), initialState.holonomicRotation));
+        PathPlannerState initialState = (PathPlannerState)m_trajectory.sample(0); // Define the initial state of the trajectory (This line was added by Team 3042)
+        Robot.drivetrain.resetOdometry(new Pose2d(initialState.poseMeters.getTranslation(), initialState.holonomicRotation)); // Reset the odometry to the initial state of the trajectory (This line was added by Team 3042)
 
         m_timer.reset();
         m_timer.start();
