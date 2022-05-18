@@ -1,32 +1,33 @@
 package org.usfirst.frc.team3042.robot;
 
-import com.revrobotics.CANSparkMax.IdleMode;
-
 import org.usfirst.frc.team3042.lib.Log;
 
 import edu.wpi.first.math.util.Units;
 
 /** RobotMap ******************************************************************
- * The robot configuration file. */
+ * This is the robot configuration file. */
 public class RobotMap {	
 	/** Robot Size Parameters **************************************************/
 	public static final double TRACK_WIDTH = 0.57785; // Distance between centers of right and left wheels on robot (in meters)
     public static final double WHEEL_BASE = 0.517525; // Distance between centers of front and back wheels on robot (in meters) 
 
 	/** CAN ID numbers ********************************************************/
-	public static final int CAN_LEFT_FRONT_MOTOR = 3;
-	public static final int CAN_RIGHT_FRONT_MOTOR = 4;
-	public static final int CAN_LEFT_BACK_MOTOR = 5;
-	public static final int CAN_RIGHT_BACK_MOTOR = 2;
+	public static final int kFrontLeftDriveMotorPort = 1; //TODO: Determine the actual CAN ID of this motor
+	public static final int kFrontLeftTurningMotorPort = 2; //TODO: Determine the actual CAN ID of this motor
+	public static final int kFrontRightDriveMotorPort = 3; //TODO: Determine the actual CAN ID of this motor
+    public static final int kFrontRightTurningMotorPort = 4; //TODO: Determine the actual CAN ID of this motor
+	public static final int kBackLeftDriveMotorPort = 5; //TODO: Determine the actual CAN ID of this motor
+    public static final int kBackLeftTurningMotorPort = 6; //TODO: Determine the actual CAN ID of this motor
+	public static final int kBackRightDriveMotorPort = 7; //TODO: Determine the actual CAN ID of this motor
+    public static final int kBackRightTurningMotorPort = 8; //TODO: Determine the actual CAN ID of this motor
+	public static final int kFrontLeftDriveAbsoluteEncoderPort = 9; //TODO: Determine the actual CAN ID of this CANcoder
+	public static final int kFrontRightDriveAbsoluteEncoderPort = 10; //TODO: Determine the actual CAN ID of this CANcoder
+	public static final int kBackLeftDriveAbsoluteEncoderPort = 11; //TODO: Determine the actual CAN ID of this CANcoder
+	public static final int kBackRightDriveAbsoluteEncoderPort = 12; //TODO: Determine the actual CAN ID of this CANcoder
 
 	/** Drivetrain Settings ***************************************************/
-	public static final IdleMode DRIVETRAIN_BRAKE_MODE = IdleMode.kBrake;
 	public static final double JOYSTICK_DRIVE_SCALE = 1; // Determines the max driving speed of the robot
 	public static final double JOYSTICK_DRIVE_SCALE_LOW = 0.2; // Determines driving speed of the robot when in slow mode
-	public static final boolean REVERSE_LEFT_FRONT_MOTOR = false;
-	public static final boolean REVERSE_RIGHT_FRONT_MOTOR = false;
-	public static final boolean REVERSE_LEFT_BACK_MOTOR = true;
-	public static final boolean REVERSE_RIGHT_BACK_MOTOR = true;
 	public static final double VELOCITY_MAX_MPS = 4;
 	public static final double ACCELERATION_MAX_MPS = 2;
 	public static final double kP_FRONT_RIGHT_VELOCITY = 0.0010269;
@@ -39,35 +40,25 @@ public class RobotMap {
 	public static final double kMAX_ANGULAR_SPEED_RADIANS_PER_SECOND = 2*Math.PI;
 	public static final double kMAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED = 2*Math.PI;
 	//swerve part :3
-	public static final int kFrontLeftDriveMotorPort = 0;
-	public static final int kFrontLeftTurningMotorPort = 0;
     public static final boolean kFrontLeftDriveEncoderReversed = false;
     public static final boolean kFrontLeftTurningEncoderReversed = false;
-    public static final int kFrontLeftDriveAbsoluteEncoderPort = 0;
-    public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = 0;
-    public static final boolean kFrontLeftDriveAbsoluteEncoderReversed = false;
-    public static final int kFrontRightDriveMotorPort = 0;
-    public static final int kFrontRightTurningMotorPort = 0;
+	public static final boolean kFrontLeftDriveAbsoluteEncoderReversed = false;
+    public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = 0; //TODO: Measure this offset on the physical SwerveBot after it is built
+    
     public static final boolean kFrontRightDriveEncoderReversed = false;
     public static final boolean kFrontRightTurningEncoderReversed = false;
-    public static final int kFrontRightDriveAbsoluteEncoderPort = 0;
-    public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = 0;
-    public static final boolean kFrontRightDriveAbsoluteEncoderReversed = false;
-    public static final int kBackLeftDriveMotorPort = 0;
-    public static final int kBackLeftTurningMotorPort = 0;
+	public static final boolean kFrontRightDriveAbsoluteEncoderReversed = false;
+    public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = 0; //TODO: Measure this offset on the physical SwerveBot after it is built
+    
     public static final boolean kBackLeftDriveEncoderReversed = false;
 	public static final boolean kBackLeftTurningEncoderReversed = false;
-    public static final int kBackLeftDriveAbsoluteEncoderPort = 0;
-    public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = 0;
-    public static final boolean kBackLeftDriveAbsoluteEncoderReversed = false;
-    public static final int kBackRightDriveMotorPort = 0;
-    public static final int kBackRightTurningMotorPort = 0;
+	public static final boolean kBackLeftDriveAbsoluteEncoderReversed = false;
+    public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = 0; //TODO: Measure this offset on the physical SwerveBot after it is built
+    
     public static final boolean kBackRightDriveEncoderReversed = false;
     public static final boolean kBackRightTurningEncoderReversed = false;
-    public static final int kBackRightDriveAbsoluteEncoderPort = 0;
-    public static final double kBackRightDriveAbsoluteEncoderOffsetRad = 0;
-    public static final boolean kBackRightDriveAbsoluteEncoderReversed = false;
-    public static final boolean fieldOriented = false;
+	public static final boolean kBackRightDriveAbsoluteEncoderReversed = false;
+    public static final double kBackRightDriveAbsoluteEncoderOffsetRad = 0; //TODO: Measure this offset on the physical SwerveBot after it is built
 
 	/** Swerve Module Settings ************************************************/
 	public static final double kWheelDiameterMeters = Units.inchesToMeters(4); // Convert wheel diameter in inches to meters
@@ -107,4 +98,4 @@ public class RobotMap {
 	
 	/** Subsystems ************************************************************/
 	public static final Log.Level	LOG_DRIVETRAIN						= Log.Level.TRACE;
-   }
+}

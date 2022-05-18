@@ -122,7 +122,7 @@ public class Robot extends TimedRobot {
 		drivetrain.drive(xSpeed, ySpeed, zSpeed, true);
 	} 
 
-	public static SequentialCommandGroup constructTrajectoryCommand(String pathName, double velocityMax, double accelMax) { // Give this a path name and it will return a PPMecanumControllerCommand for that path :)
+	public static SequentialCommandGroup constructTrajectoryCommand(String pathName, double velocityMax, double accelMax) { // Give this a path name and it will return a PPSwerveControllerCommand for that path :)
 		
 		PathPlannerTrajectory path = PathPlanner.loadPath(pathName, velocityMax, accelMax); 
 
@@ -136,6 +136,6 @@ public class Robot extends TimedRobot {
 
 		drivetrain::setModuleStates, drivetrain);
 
-		return swerveControllerCommand.andThen(() -> drivetrain.drive(0, 0, 0, false));
+		return swerveControllerCommand.andThen(() -> drivetrain.stopModules());
 	}
 }
