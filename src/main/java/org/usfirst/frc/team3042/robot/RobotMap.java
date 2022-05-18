@@ -42,6 +42,36 @@ public class RobotMap {
     public static final double kP_THETA_CONTROLLER = 9.6421;
 	public static final double kMAX_ANGULAR_SPEED_RADIANS_PER_SECOND = 2*Math.PI;
 	public static final double kMAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED = 2*Math.PI;
+	//swerve part :3
+	public static final int kFrontLeftDriveMotorPort = 0;
+	public static final int kFrontLeftTurningMotorPort = 0;
+    public static final boolean kFrontLeftDriveEncoderReversed = false;
+    public static final boolean kFrontLeftTurningEncoderReversed = false;
+    public static final int kFrontLeftDriveAbsoluteEncoderPort = 0;
+    public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = 0;
+    public static final boolean kFrontLeftDriveAbsoluteEncoderReversed = false;
+    public static final int kFrontRightDriveMotorPort = 0;
+    public static final int kFrontRightTurningMotorPort = 0;
+    public static final boolean kFrontRightDriveEncoderReversed = false;
+    public static final boolean kFrontRightTurningEncoderReversed = false;
+    public static final int kFrontRightDriveAbsoluteEncoderPort = 0;
+    public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = 0;
+    public static final boolean kFrontRightDriveAbsoluteEncoderReversed = false;
+    public static final int kBackLeftDriveMotorPort = 0;
+    public static final int kBackLeftTurningMotorPort = 0;
+    public static final boolean kBackLeftDriveEncoderReversed = false;
+	public static final boolean kBackLeftTurningEncoderReversed = false;
+    public static final int kBackLeftDriveAbsoluteEncoderPort = 0;
+    public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = 0;
+    public static final boolean kBackLeftDriveAbsoluteEncoderReversed = false;
+    public static final int kBackRightDriveMotorPort = 0;
+    public static final int kBackRightTurningMotorPort = 0;
+    public static final boolean kBackRightDriveEncoderReversed = false;
+    public static final boolean kBackRightTurningEncoderReversed = false;
+    public static final int kBackRightDriveAbsoluteEncoderPort = 0;
+    public static final double kBackRightDriveAbsoluteEncoderOffsetRad = 0;
+    public static final boolean kBackRightDriveAbsoluteEncoderReversed = false;
+    public static final boolean fieldOriented = false;
 
 	/** Swerve Module Settings ************************************************/
 	public static final double kWheelDiameterMeters = Units.inchesToMeters(4); // Convert wheel diameter in inches to meters
@@ -81,4 +111,4 @@ public class RobotMap {
 	
 	/** Subsystems ************************************************************/
 	public static final Log.Level	LOG_DRIVETRAIN						= Log.Level.TRACE;
-}
+   }

@@ -40,7 +40,6 @@ public class Drivetrain_GyroTurn extends CommandBase {
 	 * Called just before this Command runs the first time */
 	public void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
-		drivetrain.driveCartesian(0, 0, 0);
 		lastError = 0.0;
 		integralError = 0.0;
 		drivetrain.zeroGyro();
@@ -62,7 +61,7 @@ public class Drivetrain_GyroTurn extends CommandBase {
 		correction = Math.min(MAX_POWER, correction);
 		correction = Math.max(-MAX_POWER, correction);
 	
-		drivetrain.driveCartesian(0, 0, -1 * correction);		
+		drivetrain.drive(0, 0, -1 * correction, false);		
 		
 		log.add("***** " + correction, Log.Level.DEBUG);
 
@@ -78,6 +77,6 @@ public class Drivetrain_GyroTurn extends CommandBase {
 	// Called once the command ends or is interrupted.
 	public void end(boolean interrupted) {
 		log.add("End", Log.Level.TRACE);
-		drivetrain.driveCartesian(0, 0, 0);
+		drivetrain.stopModules();
 	}
 }

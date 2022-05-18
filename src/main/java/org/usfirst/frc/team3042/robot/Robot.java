@@ -5,7 +5,7 @@ import com.pathplanner.lib.PathPlannerTrajectory;
 
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Default;
-import org.usfirst.frc.team3042.robot.commands.autonomous.helperCommands.PPMecanumControllerCommand;
+import org.usfirst.frc.team3042.robot.commands.autonomous.helperCommands.PPCustomSwerveControllerCommand;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.PowerDistribution;
@@ -53,7 +53,6 @@ public class Robot extends TimedRobot {
 		thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
 		drivetrain.zeroGyro();
-		drivetrain.resetEncoders();
 		
 		// Autonomous Routines //
 		chooser.setDefaultOption("Default Auto", new AutonomousMode_Default());
@@ -83,7 +82,6 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		log.add("Autonomous Init", Log.Level.TRACE);
 
-		drivetrain.resetEncoders();
 		autonomousCommand = chooser.getSelected();
 		
 		// schedule the autonomous command
@@ -96,12 +94,6 @@ public class Robot extends TimedRobot {
 	 * This function is called periodically during autonomous */
 	public void autonomousPeriodic() {
 		CommandScheduler.getInstance().run();
-		SmartDashboard.putNumber("Robot Speed", (Math.abs(drivetrain.getLeftFrontSpeed()) + Math.abs(drivetrain.getRightFrontSpeed()) + Math.abs(drivetrain.getLeftBackSpeed()) + Math.abs(drivetrain.getRightBackSpeed())) / 4.0); // Average drivetrain speed
-		SmartDashboard.putNumber("Gyro Angle", drivetrain.getGyroAngle()); // The current gyroscope angle
-		SmartDashboard.putNumber("Encoder Position (LF)", drivetrain.getLeftFrontPosition()); //The current right encoder position
-		SmartDashboard.putNumber("Encoder Position (RF)", drivetrain.getRightFrontPosition()); //The current left encoder position
-		SmartDashboard.putNumber("Encoder Position (LB)", drivetrain.getLeftBackPosition()); //The current right encoder position
-		SmartDashboard.putNumber("Encoder Position (RB)", drivetrain.getRightBackPosition()); //The current left encoder position
 	}
 	
 	/** teleopInit ************************************************************
@@ -114,9 +106,6 @@ public class Robot extends TimedRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
-		
-		drivetrain.resetEncoders();
-
 		goalAngle = drivetrain.getGyroAngle();
 	}
 
@@ -124,31 +113,13 @@ public class Robot extends TimedRobot {
 	 * This function is called periodically during operator control */
 	public void teleopPeriodic() {
 		CommandScheduler.getInstance().run();
-		SmartDashboard.putNumber("Robot Speed", (Math.abs(drivetrain.getLeftFrontSpeed()) + Math.abs(drivetrain.getRightFrontSpeed()) + Math.abs(drivetrain.getLeftBackSpeed()) + Math.abs(drivetrain.getRightBackSpeed())) / 4.0); // Average drivetrain speed
 		SmartDashboard.putNumber("Gyro Angle", drivetrain.getGyroAngle()); // The current gyroscope angle
-		SmartDashboard.putNumber("Encoder Position (LF)", drivetrain.getLeftFrontPosition()); //The current right encoder position
-		SmartDashboard.putNumber("Encoder Position (RF)", drivetrain.getRightFrontPosition()); //The current left encoder position
-		SmartDashboard.putNumber("Encoder Position (LB)", drivetrain.getLeftBackPosition()); //The current right encoder position
-		SmartDashboard.putNumber("Encoder Position (RB)", drivetrain.getRightBackPosition()); //The current left encoder position
 
 		double ySpeed = oi.getYSpeed();
 		double xSpeed = oi.getXSpeed();
 		double zSpeed = oi.getZSpeed();
 
-		if (Math.abs(zSpeed) > 0.01) { // If we are telling the robot to rotate, then let it rotate
-			drivetrain.driveCartesian(ySpeed, xSpeed, zSpeed, drivetrain.getGyroAngle());
-			goalAngle = drivetrain.getGyroAngle();
-		}
-		else { // Otherwise, use the gyro to maintain our current angle
-			double error = goalAngle - drivetrain.getGyroAngle();
-			
-			double correction = RobotMap.kP_GYRO * error;
-
-			correction = Math.min(RobotMap.MAX_POWER_GYRO, correction);
-			correction = Math.max(-RobotMap.MAX_POWER_GYRO, correction);
-			
-			drivetrain.driveCartesian(ySpeed, xSpeed, -1 * correction, drivetrain.getGyroAngle());
-		}
+		drivetrain.drive(xSpeed, ySpeed, zSpeed, true);
 	} 
 
 	public static SequentialCommandGroup constructTrajectoryCommand(String pathName, double velocityMax, double accelMax) { // Give this a path name and it will return a PPMecanumControllerCommand for that path :)
@@ -156,15 +127,15 @@ public class Robot extends TimedRobot {
 		PathPlannerTrajectory path = PathPlanner.loadPath(pathName, velocityMax, accelMax); 
 
 		// Add kinematics to ensure max speed is actually obeyed
-		PPMecanumControllerCommand mecanumControllerCommand = new PPMecanumControllerCommand(path, drivetrain::getPose, drivetrain.getkDriveKinematics(),
+		PPCustomSwerveControllerCommand swerveControllerCommand = new PPCustomSwerveControllerCommand(path, drivetrain::getPose, drivetrain.getkDriveKinematics(),
 
 		// Position contollers
 		new PIDController(RobotMap.kP_X_CONTROLLER, 0, 0),
 		new PIDController(RobotMap.kP_Y_CONTROLLER, 0, 0),
 		thetaController,
 
-		drivetrain::setWheelSpeeds, drivetrain);
+		drivetrain::setModuleStates, drivetrain);
 
-		return mecanumControllerCommand.andThen(() -> drivetrain.driveCartesian(0, 0, 0));
+		return swerveControllerCommand.andThen(() -> drivetrain.drive(0, 0, 0, false));
 	}
 }

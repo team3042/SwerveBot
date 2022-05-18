@@ -41,9 +41,7 @@ public class Drivetrain_GyroStraight extends CommandBase {
 	 * Called just before this Command runs the first time */
 	public void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
-		drivetrain.driveCartesian(0, 0, 0);
 		goalAngle = drivetrain.getGyroAngle();
-		drivetrain.resetEncoders();
 	}
 
 	/** execute ***************************************************************
@@ -56,20 +54,20 @@ public class Drivetrain_GyroStraight extends CommandBase {
 		correction = Math.min(MAX_CORRECTION, correction);
 		correction = Math.max(-MAX_CORRECTION, correction);
 		
-		drivetrain.driveCartesian(0, forwardPower, -1 * correction);
+		drivetrain.drive(forwardPower, 0, -1 * correction, false);
 	}
 	
 	/** isFinished ************************************************************	
 	 * Make this return true when this Command no longer needs to run execute() */
 	public boolean isFinished() {
-		boolean leftFrontGoalReached = Math.abs(drivetrain.getLeftFrontPosition()) >= goalDistance;
-		boolean rightFrontGoalReached = Math.abs(drivetrain.getRightFrontPosition()) >= goalDistance;
+		boolean leftFrontGoalReached = Math.abs(drivetrain.getFrontLeft().getDrivePosition()) >= goalDistance;
+		boolean rightFrontGoalReached = Math.abs(drivetrain.getFrontRight().getDrivePosition()) >= goalDistance;
 		return leftFrontGoalReached || rightFrontGoalReached;
 	}
 
 	// Called once the command ends or is interrupted.
 	public void end(boolean interrupted) {
 		log.add("End", Log.Level.TRACE);
-		drivetrain.driveCartesian(0, 0, 0);
+		drivetrain.stopModules();
 	}
 }
