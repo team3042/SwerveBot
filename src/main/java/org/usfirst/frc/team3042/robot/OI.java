@@ -39,6 +39,7 @@ public class OI {
 		// Setup Driving Controls //
 		joyLeft = new Gamepad(USB_JOY_LEFT);
 		joyRight = new Gamepad(USB_JOY_RIGHT);
+		
 		driveAxisX = JOYSTICK_X_AXIS;
 		driveAxisY = JOYSTICK_Y_AXIS;
 		driveAxisZ = JOYSTICK_Z_AXIS;
