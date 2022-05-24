@@ -2,10 +2,11 @@ package org.usfirst.frc.team3042.robot;
 
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
+import com.pathplanner.lib.PathPlannerTrajectory.PathPlannerState;
+import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 
 import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.commands.autonomous.AutonomousMode_Default;
-import org.usfirst.frc.team3042.robot.commands.autonomous.helperCommands.PPCustomSwerveControllerCommand;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.PowerDistribution;
@@ -15,10 +16,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.cameraserver.CameraServer;
 
 /** Robot *********************************************************************
@@ -127,7 +130,7 @@ public class Robot extends TimedRobot {
 		PathPlannerTrajectory path = PathPlanner.loadPath(pathName, velocityMax, accelMax); 
 
 		// Add kinematics to ensure max speed is actually obeyed
-		PPCustomSwerveControllerCommand swerveControllerCommand = new PPCustomSwerveControllerCommand(path, drivetrain::getPose, drivetrain.getkDriveKinematics(),
+		PPSwerveControllerCommand swerveControllerCommand = new PPSwerveControllerCommand(path, drivetrain::getPose, drivetrain.getkDriveKinematics(),
 
 		// Position contollers
 		new PIDController(RobotMap.kP_X_CONTROLLER, 0, 0),
@@ -136,6 +139,12 @@ public class Robot extends TimedRobot {
 
 		drivetrain::setModuleStates, drivetrain);
 
-		return swerveControllerCommand.andThen(() -> drivetrain.stopModules());
+		PathPlannerState initialState = (PathPlannerState)path.sample(0); // Define the initial state of the trajectory
+
+		return new SequentialCommandGroup(
+			new InstantCommand(() -> drivetrain.resetOdometry(new Pose2d(initialState.poseMeters.getTranslation(), initialState.holonomicRotation))),
+			swerveControllerCommand,
+			new InstantCommand(() -> drivetrain.stopModules())
+		);
 	}
 }
