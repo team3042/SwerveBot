@@ -8,8 +8,8 @@ import edu.wpi.first.math.util.Units;
  * This is the robot configuration file. */
 public class RobotMap {	
 	/** Robot Size Parameters **************************************************/
-	public static final double TRACK_WIDTH = 0.57785; // Distance between centers of right and left wheels on robot (in meters)
-    public static final double WHEEL_BASE = 0.517525; // Distance between centers of front and back wheels on robot (in meters) 
+	public static final double TRACK_WIDTH = 0.57785; // Distance between centers of right and left wheels on robot (in meters) // TODO: Measure the actual value for this!
+    public static final double WHEEL_BASE = 0.517525; // Distance between centers of front and back wheels on robot (in meters) // TODO: Measure the actual value for this!
 
 	/** CAN ID numbers ********************************************************/
 	public static final int kFrontLeftDriveMotorPort = 1; //TODO: Determine the actual CAN ID of this motor
@@ -34,11 +34,12 @@ public class RobotMap {
 	public static final double kP_FRONT_LEFT_VELOCITY = 0.0010269;
 	public static final double kP_BACK_RIGHT_VELOCITY = 0.0010269;
 	public static final double kP_BACK_LEFT_VELOCITY = 0.0010269;
-	public static final double kP_X_CONTROLLER = 9.6421;
-    public static final double kP_Y_CONTROLLER = 9.6421;
-    public static final double kP_THETA_CONTROLLER = 9.6421;
-	public static final double kMAX_ANGULAR_SPEED_RADIANS_PER_SECOND = 2*Math.PI;
-	public static final double kMAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED = 2*Math.PI;
+	public static final double kP_X_CONTROLLER = 9.6421; // TODO: Find this value by characterizing the drivetrain with SysID, and then by using guess & check afterwards
+    public static final double kP_Y_CONTROLLER = 9.6421; // TODO: Find this value by characterizing the drivetrain with SysID, and then by using guess & check afterwards	
+    public static final double kP_THETA_CONTROLLER = 9.6421; // TODO: Find this value by characterizing the drivetrain with SysID, and then by using guess & check afterwards
+	public static final double kP_DRIVE_VELOCITY = 0.0010269; // TODO: Find this value by characterizing the drivetrain with SysID!
+	public static final double kMAX_ANGULAR_SPEED_RADIANS_PER_SECOND = 2*Math.PI; // TODO: Adjust this?
+	public static final double kMAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED = 2*Math.PI; // TODO: Adjust this?
 	//swerve part :3
     public static final boolean kFrontLeftDriveEncoderReversed = false;
     public static final boolean kFrontLeftTurningEncoderReversed = false;
@@ -69,7 +70,7 @@ public class RobotMap {
 	public static final double kDriveEncoderRPM2MeterPerSec = kDriveEncoderRot2Meter / 60; // Convert RPM to meters/second
 	public static final double kTurningEncoderRPM2RadPerSec = kTurningEncoderRot2Rad / 60; // Convert RPM to radians/sec
 	public static final double kPhysicalMaxSpeedMetersPerSecond = Units.feetToMeters(14.5); // Convert max speed from feet/sec to meters/sec
-	public static final double kP_Turning = 1.0; // TODO: We'll probably need to tune this value through testing!
+	public static final double kP_Turning = 1.0; // TODO: We might need to tune this value through testing!
 	
 	/** Drivetrain Gyro Drive Settings ****************************************/
 	public static final double kP_GYRO = 0.01;
