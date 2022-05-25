@@ -1,7 +1,7 @@
 package org.usfirst.frc.team3042.robot.subsystems;
 
 import com.ctre.phoenix.sensors.CANCoder;
-
+import com.ctre.phoenix.sensors.CANCoderStatusFrame;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -41,6 +41,8 @@ public class SwerveModule {
         this.absoluteEncoderReversed = absoluteEncoderReversed;
         absoluteEncoder = new CANCoder(absoluteEncoderId);
 
+        absoluteEncoder.setStatusFramePeriod(CANCoderStatusFrame.SensorData, 100);
+
         driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless);
         turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);
 
@@ -49,6 +51,12 @@ public class SwerveModule {
 
         driveMotor.setInverted(driveMotorReversed);
         turningMotor.setInverted(turningMotorReversed);
+
+        driveMotor.enableVoltageCompensation(RobotMap.nominalVoltage);
+        turningMotor.enableVoltageCompensation(RobotMap.nominalVoltage);
+
+        driveMotor.setSmartCurrentLimit((int) RobotMap.driveCurrentLimit);
+        turningMotor.setSmartCurrentLimit((int) RobotMap.steerCurrentLimit);
 
         driveMotor.setIdleMode(IdleMode.kBrake);
         turningMotor.setIdleMode(IdleMode.kBrake);
@@ -108,9 +116,9 @@ public class SwerveModule {
         }
 
         state = SwerveModuleState.optimize(state, getState().angle);
-
-        driveMotor.set(state.speedMetersPerSecond / RobotMap.kPhysicalMaxSpeedMetersPerSecond);
+        driveMotor.setVoltage(state.speedMetersPerSecond / RobotMap.kPhysicalMaxSpeedMetersPerSecond * RobotMap.nominalVoltage);
         turningMotor.set(turningPidController.calculate(getTurningPosition(), state.angle.getRadians()));
+        
         SmartDashboard.putString("swerve[" + absoluteEncoder.getDeviceID() + "] state", state.toString());
     }
 

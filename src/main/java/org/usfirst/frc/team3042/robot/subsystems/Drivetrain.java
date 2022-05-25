@@ -68,7 +68,7 @@ public class Drivetrain extends SubsystemBase {
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(this));
 
 	ADIS16470_IMU gyroscope = new ADIS16470_IMU(); // The gyroscope sensor
-	SwerveDriveOdometry odometry = new SwerveDriveOdometry(kDriveKinematics, Rotation2d.fromDegrees(-gyroscope.getAngle()));
+	SwerveDriveOdometry odometry = new SwerveDriveOdometry(kDriveKinematics, Rotation2d.fromDegrees(gyroscope.getAngle()));
 
 	/** Drivetrain Constructor *************************************************/
 	public Drivetrain() {

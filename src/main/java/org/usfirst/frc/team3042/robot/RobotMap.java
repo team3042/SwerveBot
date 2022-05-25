@@ -38,7 +38,7 @@ public class RobotMap {
     public static final double kP_Y_CONTROLLER = 9.6421; // TODO: Find this value by characterizing the drivetrain with SysID, and then by using guess & check afterwards	
     public static final double kP_THETA_CONTROLLER = 9.6421; // TODO: Find this value by characterizing the drivetrain with SysID, and then by using guess & check afterwards
 	public static final double kP_DRIVE_VELOCITY = 0.0010269; // TODO: Find this value by characterizing the drivetrain with SysID!
-	public static final double kMAX_ANGULAR_SPEED_RADIANS_PER_SECOND = 2*Math.PI; // TODO: Adjust this?
+	public static final double kMAX_ANGULAR_SPEED_RADIANS_PER_SECOND = VELOCITY_MAX_MPS / Math.hypot(TRACK_WIDTH / 2, WHEEL_BASE /2);
 	public static final double kMAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED = 2*Math.PI; // TODO: Adjust this?
 	//swerve part :3
     public static final boolean kFrontLeftDriveEncoderReversed = false;
@@ -71,6 +71,9 @@ public class RobotMap {
 	public static final double kTurningEncoderRPM2RadPerSec = kTurningEncoderRot2Rad / 60; // Convert RPM to radians/sec
 	public static final double kPhysicalMaxSpeedMetersPerSecond = Units.feetToMeters(14.5); // Convert max speed from feet/sec to meters/sec
 	public static final double kP_Turning = 1.0; // TODO: We might need to tune this value through testing!
+	public static final double nominalVoltage = 12.0;
+    public static final double driveCurrentLimit = 80.0;
+    public static final double steerCurrentLimit = 20.0;
 	
 	/** Drivetrain Gyro Drive Settings ****************************************/
 	public static final double kP_GYRO = 0.01;
