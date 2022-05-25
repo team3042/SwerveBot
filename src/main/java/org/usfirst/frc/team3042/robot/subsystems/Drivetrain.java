@@ -56,7 +56,7 @@ public class Drivetrain extends SubsystemBase {
 		RobotMap.kBackRightDriveAbsoluteEncoderOffsetRad,
 		RobotMap.kBackRightDriveAbsoluteEncoderReversed);
 
-	private static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(RobotMap.kMAX_ANGULAR_SPEED_RADIANS_PER_SECOND, RobotMap.kMAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED);
+	private static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(RobotMap.kMAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND, RobotMap.kMAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED);
 
 	private static final SwerveDriveKinematics kDriveKinematics =
 		new SwerveDriveKinematics(new Translation2d(WHEEL_BASE / 2, TRACK_WIDTH / 2), 

@@ -30,16 +30,11 @@ public class RobotMap {
 	public static final double JOYSTICK_DRIVE_SCALE_LOW = 0.2; // Determines driving speed of the robot when in slow mode
 	public static final double VELOCITY_MAX_MPS = 4;
 	public static final double ACCELERATION_MAX_MPS = 2;
-	public static final double kP_FRONT_RIGHT_VELOCITY = 0.0010269;
-	public static final double kP_FRONT_LEFT_VELOCITY = 0.0010269;
-	public static final double kP_BACK_RIGHT_VELOCITY = 0.0010269;
-	public static final double kP_BACK_LEFT_VELOCITY = 0.0010269;
 	public static final double kP_X_CONTROLLER = 9.6421; // TODO: Find this value by characterizing the drivetrain with SysID, and then by using guess & check afterwards
     public static final double kP_Y_CONTROLLER = 9.6421; // TODO: Find this value by characterizing the drivetrain with SysID, and then by using guess & check afterwards	
     public static final double kP_THETA_CONTROLLER = 9.6421; // TODO: Find this value by characterizing the drivetrain with SysID, and then by using guess & check afterwards
-	public static final double kP_DRIVE_VELOCITY = 0.0010269; // TODO: Find this value by characterizing the drivetrain with SysID!
-	public static final double kMAX_ANGULAR_SPEED_RADIANS_PER_SECOND = VELOCITY_MAX_MPS / Math.hypot(TRACK_WIDTH / 2, WHEEL_BASE /2);
-	public static final double kMAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED = 2*Math.PI; // TODO: Adjust this?
+	public static final double kMAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND = VELOCITY_MAX_MPS / Math.hypot(TRACK_WIDTH / 2, WHEEL_BASE /2);
+	public static final double kMAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED = ACCELERATION_MAX_MPS / Math.hypot(TRACK_WIDTH / 2, WHEEL_BASE /2);
 	//swerve part :3
     public static final boolean kFrontLeftDriveEncoderReversed = false;
     public static final boolean kFrontLeftTurningEncoderReversed = false;
