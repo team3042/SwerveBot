@@ -21,14 +21,15 @@ public class Drivetrain_GyroStraight extends CommandBase {
 	Drivetrain drivetrain = Robot.drivetrain;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(drivetrain));
 
-	double forwardSpeed, goalAngle, goalDistance;
+	double forwardSpeed, sideSpeed, goalAngle, goalDistance;
 	double frontLeftStart, frontRightStart, backLeftStart, backRightStart;
 	
 	/** Drivetrain Gyro Straight **********************************************
 	 * Required subsystems will cancel commands when this command is run */
-	public Drivetrain_GyroStraight(double distance, double speed) { // distance is measured in meters and speed is measured in meters per second
+	public Drivetrain_GyroStraight(double distance, double xSpeed, double ySpeed) { // distance is measured in meters and speed is measured in meters per second
 		log.add("Constructor", Log.Level.TRACE);
-		forwardSpeed = speed;
+		forwardSpeed = xSpeed;
+		sideSpeed = ySpeed;
 		
 		// convert distance to revolutions
 		goalDistance = distance / CIRCUMFRENCE;
@@ -60,7 +61,7 @@ public class Drivetrain_GyroStraight extends CommandBase {
 		correction = Math.min(MAX_CORRECTION, correction);
 		correction = Math.max(-MAX_CORRECTION, correction);
 		
-		drivetrain.drive(forwardSpeed, 0, -1 * correction, false);
+		drivetrain.drive(forwardSpeed, sideSpeed, -1 * correction, false);
 	}
 	
 	/** isFinished ************************************************************	
