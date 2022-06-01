@@ -38,10 +38,10 @@ public class Drivetrain_XStance extends CommandBase {
 		log.add("Initialize", Log.Level.TRACE);
 		drivetrain.stopModules();
 
-		drivetrain.getFrontLeft().setDesiredState(FrontLeftState);
-		drivetrain.getFrontRight().setDesiredState(FrontRightState);
-		drivetrain.getBackLeft().setDesiredState(BackLeftState);
-		drivetrain.getBackRight().setDesiredState(BackRightState);
+		drivetrain.getFrontLeft().setDesiredState(FrontLeftState, true);
+		drivetrain.getFrontRight().setDesiredState(FrontRightState, true);
+		drivetrain.getBackLeft().setDesiredState(BackLeftState, true);
+		drivetrain.getBackRight().setDesiredState(BackRightState, true);
 	}
 
 	/** execute ***************************************************************

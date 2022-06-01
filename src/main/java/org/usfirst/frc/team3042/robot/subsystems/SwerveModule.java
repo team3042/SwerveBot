@@ -109,8 +109,8 @@ public class SwerveModule {
     }
 
     // Set the currently desired SwerveModuleState
-    public void setDesiredState(SwerveModuleState state) {
-        if (Math.abs(state.speedMetersPerSecond) < 0.001) {
+    public void setDesiredState(SwerveModuleState state, boolean xStance) {
+        if (!xStance && Math.abs(state.speedMetersPerSecond) < 0.001) {
             stop();
             return;
         }

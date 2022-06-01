@@ -124,10 +124,10 @@ public class Drivetrain extends SubsystemBase {
 	// Update the current desired state of all 4 modules
 	public void setModuleStates(SwerveModuleState[] desiredStates) {
 		SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, RobotMap.kPhysicalMaxSpeedMetersPerSecond);
-		frontLeft.setDesiredState(desiredStates[0]);
-		frontRight.setDesiredState(desiredStates[1]);
-		backLeft.setDesiredState(desiredStates[2]);
-		backRight.setDesiredState(desiredStates[3]);
+		frontLeft.setDesiredState(desiredStates[0], false);
+		frontRight.setDesiredState(desiredStates[1], false);
+		backLeft.setDesiredState(desiredStates[2], false);
+		backRight.setDesiredState(desiredStates[3], false);
 	}
 	// Drive the robot with the specified x, y, and rotation speeds
 	public void drive(double xSpeed, double ySpeed, double rotationSpeed, boolean fieldOriented) {
