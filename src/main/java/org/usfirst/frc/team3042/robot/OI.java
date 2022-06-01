@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3042.robot;
 
 import org.usfirst.frc.team3042.lib.Log;
+import org.usfirst.frc.team3042.robot.commands.Drivetrain_XStance;
 import org.usfirst.frc.team3042.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -48,6 +49,7 @@ public class OI {
 		joyRight.button1.whenPressed(new InstantCommand(this::toggleScale)); // Toggle into slow driving mode
 		joyRight.button1.whenReleased(new InstantCommand(this::toggleScale)); // Toggle out of slow driving mode
 		
+		joyLeft.button4.whenPressed(new Drivetrain_XStance());
 	}
 	
 	/** Access to the driving axes values *****************************
