@@ -108,7 +108,7 @@ public class Robot extends TimedRobot {
 		//If you want the autonomous command to continue until interrupted by another command, remove this line or comment it out.
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
-		}
+		}  
 		goalAngle = drivetrain.getGyroAngle();
 	}
 
@@ -117,6 +117,11 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		CommandScheduler.getInstance().run();
 		SmartDashboard.putNumber("Gyro Angle", drivetrain.getGyroAngle()); // The current gyroscope angle
+		       
+        SmartDashboard.putString("BackLeft State", drivetrain.getBackLeft().getState().toString());
+		SmartDashboard.putString("FrontLeft State", drivetrain.getFrontLeft().getState().toString());
+		SmartDashboard.putString("BackRight State", drivetrain.getBackRight().getState().toString());
+		SmartDashboard.putString("FrontRight State", drivetrain.getFrontRight().getState().toString());
 
 		double ySpeed = oi.getYSpeed();
 		double xSpeed = oi.getXSpeed();

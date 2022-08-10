@@ -118,8 +118,6 @@ public class SwerveModule {
         state = SwerveModuleState.optimize(state, getState().angle);
         driveMotor.setVoltage(state.speedMetersPerSecond / RobotMap.kPhysicalMaxSpeedMetersPerSecond * RobotMap.nominalVoltage);
         turningMotor.set(turningPidController.calculate(getTurningPosition(), state.angle.getRadians()));
-        
-        SmartDashboard.putString("swerve[" + absoluteEncoder.getDeviceID() + "] state", state.toString());
     }
 
     // Set 0% power to both motors

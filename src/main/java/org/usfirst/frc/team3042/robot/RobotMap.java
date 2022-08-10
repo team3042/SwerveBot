@@ -12,17 +12,17 @@ public class RobotMap {
     public static final double WHEEL_BASE = 0.517525; // Distance between centers of front and back wheels on robot (in meters) // TODO: Measure the actual value for this!
 
 	/** CAN ID numbers ********************************************************/
-	public static final int kFrontLeftDriveMotorPort = 1; //TODO: Determine the actual CAN ID of this motor
-	public static final int kFrontLeftTurningMotorPort = 2; //TODO: Determine the actual CAN ID of this motor
-	public static final int kFrontRightDriveMotorPort = 3; //TODO: Determine the actual CAN ID of this motor
-    public static final int kFrontRightTurningMotorPort = 4; //TODO: Determine the actual CAN ID of this motor
-	public static final int kBackLeftDriveMotorPort = 5; //TODO: Determine the actual CAN ID of this motor
-    public static final int kBackLeftTurningMotorPort = 6; //TODO: Determine the actual CAN ID of this motor
-	public static final int kBackRightDriveMotorPort = 7; //TODO: Determine the actual CAN ID of this motor
-    public static final int kBackRightTurningMotorPort = 8; //TODO: Determine the actual CAN ID of this motor
-	public static final int kFrontLeftDriveAbsoluteEncoderPort = 9; //TODO: Determine the actual CAN ID of this CANcoder
-	public static final int kFrontRightDriveAbsoluteEncoderPort = 10; //TODO: Determine the actual CAN ID of this CANcoder
-	public static final int kBackLeftDriveAbsoluteEncoderPort = 11; //TODO: Determine the actual CAN ID of this CANcoder
+	public static final int kFrontLeftDriveMotorPort = 3; //TODO: Determine the actual CAN ID of this motor
+	public static final int kFrontLeftTurningMotorPort = 4; //TODO: Determine the actual CAN ID of this motor
+	public static final int kFrontRightDriveMotorPort = 8; //TODO: Determine the actual CAN ID of this motor
+    public static final int kFrontRightTurningMotorPort = 7; //TODO: Determine the actual CAN ID of this motor
+	public static final int kBackLeftDriveMotorPort = 1; //TODO: Determine the actual CAN ID of this motor
+    public static final int kBackLeftTurningMotorPort = 2; //TODO: Determine the actual CAN ID of this motor
+	public static final int kBackRightDriveMotorPort = 6; //TODO: Determine the actual CAN ID of this motor
+    public static final int kBackRightTurningMotorPort = 5; //TODO: Determine the actual CAN ID of this motor
+	public static final int kFrontLeftDriveAbsoluteEncoderPort = 10; //TODO: Determine the actual CAN ID of this CANcoder
+	public static final int kFrontRightDriveAbsoluteEncoderPort = 11; //TODO: Determine the actual CAN ID of this CANcoder
+	public static final int kBackLeftDriveAbsoluteEncoderPort = 9; //TODO: Determine the actual CAN ID of this CANcoder
 	public static final int kBackRightDriveAbsoluteEncoderPort = 12; //TODO: Determine the actual CAN ID of this CANcoder
 
 	/** Drivetrain Settings ***************************************************/
@@ -65,7 +65,7 @@ public class RobotMap {
 	public static final double kDriveEncoderRPM2MeterPerSec = kDriveEncoderRot2Meter / 60; // Convert RPM to meters/second
 	public static final double kTurningEncoderRPM2RadPerSec = kTurningEncoderRot2Rad / 60; // Convert RPM to radians/sec
 	public static final double kPhysicalMaxSpeedMetersPerSecond = Units.feetToMeters(14.5); // Convert max speed from feet/sec to meters/sec
-	public static final double kP_Turning = 1.0; // TODO: We might need to tune this value through testing!
+	public static final double kP_Turning = 0; // TODO: We might need to tune this value through testing!
 	public static final double nominalVoltage = 12.0;
     public static final double driveCurrentLimit = 80.0;
     public static final double steerCurrentLimit = 20.0;
