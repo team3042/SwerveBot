@@ -1,7 +1,6 @@
 package org.usfirst.frc.team3042.robot.subsystems;
 
 import com.ctre.phoenix.sensors.CANCoder;
-import com.ctre.phoenix.sensors.CANCoderStatusFrame;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -40,8 +39,6 @@ public class SwerveModule {
         this.absoluteEncoderReversed = absoluteEncoderReversed;
         absoluteEncoder = new CANCoder(absoluteEncoderId);
 
-        absoluteEncoder.setStatusFramePeriod(CANCoderStatusFrame.SensorData, 100);
-
         driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless);
         turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);
 
@@ -77,16 +74,16 @@ public class SwerveModule {
 
     // Methods for getting the current velocity/position of the motors
     public double getDrivePosition() {
-        return driveEncoder.getPosition();
+        return driveEncoder.getPosition(); // configured to meters
     }
     public double getTurningPosition() {
-        return turningEncoder.getPosition();
+        return turningEncoder.getPosition(); // configured to radians
     }
     public double getDriveVelocity() {
-        return driveEncoder.getVelocity();
+        return driveEncoder.getVelocity(); // configured to meters per second
     }
     public double getTurningVelocity() {
-        return turningEncoder.getVelocity();
+        return turningEncoder.getVelocity(); // configured to radians per second
     }
 
     // Get the absolute position of the module in radians
