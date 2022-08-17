@@ -64,7 +64,7 @@ public class RobotMap {
 	public static final double kTurningEncoderRot2Rad = kTurnMotorGearRatio * 2 * Math.PI; // Convert rotations to radians
 	public static final double kDriveEncoderRPM2MeterPerSec = kDriveEncoderRot2Meter / 60; // Convert RPM to meters/second
 	public static final double kTurningEncoderRPM2RadPerSec = kTurningEncoderRot2Rad / 60; // Convert RPM to radians/sec
-	public static final double kPhysicalMaxSpeedMetersPerSecond = Units.feetToMeters(14.5); // Convert max speed from feet/sec to meters/sec
+	public static final double kPhysicalMaxSpeedMetersPerSecond = Units.feetToMeters(14); // Convert max speed from feet/sec to meters/sec
 	public static final double kP_Turning = 0.4; // TODO: We need to tune this value through testing!
 	public static final double nominalVoltage = 12.0;
     public static final double driveCurrentLimit = 80.0;
