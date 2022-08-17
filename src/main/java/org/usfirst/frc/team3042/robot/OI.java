@@ -51,14 +51,29 @@ public class OI {
 	 * A negative can be added to make pushing forward positive/negative. */
 	public double getXSpeed() {
 		double joystickValue = joyRight.getRawAxis(driveAxisY);
-		return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond;
+		if (Math.abs(joystickValue) < 0.01) { // This is our deadband
+			return 0.0;
+		}
+		else {
+			return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond;
+		}	
 	}
 	public double getYSpeed() {
 		double joystickValue = joyRight.getRawAxis(driveAxisX);
-		return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond;
+		if (Math.abs(joystickValue) < 0.01) { // This is our deadband
+			return 0.0;
+		}
+		else {
+			return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond;
+		}	
 	}
 	public double getZSpeed() {
 		double joystickValue = joyLeft.getRawAxis(driveAxisX);
-		return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond;
+		if (Math.abs(joystickValue) < 0.01) { // This is our deadband
+			return 0.0;
+		}
+		else {
+			return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond;
+		}	
 	}	
 }
