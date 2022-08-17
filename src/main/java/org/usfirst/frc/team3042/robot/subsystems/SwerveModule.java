@@ -92,8 +92,11 @@ public class SwerveModule {
     public double getAbsoluteEncoderRadians() {
         double angle = absoluteEncoder.getAbsolutePosition(); // Gets the absolute position in degrees
         angle *= (Math.PI / 180); // Convert degrees to radians
-        angle -= absoluteEncoderOffsetRad; // Subtract the offset
         return angle * (absoluteEncoderReversed ? -1.0 : 1.0); // Multiply by -1 if the encoder is reversed
+    }
+
+    public void configOffset(double degrees) {
+        absoluteEncoder.configMagnetOffset(degrees);
     }
 
     // Reset the encoders

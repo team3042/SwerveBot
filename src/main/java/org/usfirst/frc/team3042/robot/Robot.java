@@ -56,6 +56,10 @@ public class Robot extends TimedRobot {
 		thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
 		drivetrain.zeroGyro();
+		drivetrain.getBackLeft().configOffset(-4.02);
+		drivetrain.getBackRight().configOffset(-2.01);
+		drivetrain.getFrontLeft().configOffset(3.35);
+		drivetrain.getFrontRight().configOffset(-93.75);
 		
 		// Autonomous Routines //
 		chooser.setDefaultOption("Default Auto", new AutonomousMode_Default());
@@ -78,6 +82,11 @@ public class Robot extends TimedRobot {
 	 * Called repeatedly while the robot is in disabled mode. */
 	public void disabledPeriodic() {
 		CommandScheduler.getInstance().run();
+
+		SmartDashboard.putString("BackLeft State", drivetrain.getBackLeft().getState().toString());
+		SmartDashboard.putString("FrontLeft State", drivetrain.getFrontLeft().getState().toString());
+		SmartDashboard.putString("BackRight State", drivetrain.getBackRight().getState().toString());
+		SmartDashboard.putString("FrontRight State", drivetrain.getFrontRight().getState().toString());
 	}
 
 	/** autonomousInit ********************************************************
