@@ -56,23 +56,19 @@ public class OI {
 	 * A negative can be added to make pushing forward positive/negative. */
 	public double getXSpeed() {
 		double joystickValue = joyRight.getRawAxis(driveAxisY);
-		joystickValue = scaleJoystick(joystickValue);
-		return -1 * joystickValue; // Multiply by -1 to reverse direction
+		joystickValue *= CURRENT_DRIVE_SCALE;
+		return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond;
 	}
 	public double getYSpeed() {
 		double joystickValue = joyRight.getRawAxis(driveAxisX);
-		joystickValue = scaleJoystick(joystickValue);
-		return joystickValue; 
+		joystickValue *= CURRENT_DRIVE_SCALE;
+		return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond;
 	}
 	public double getZSpeed() {
 		double joystickValue = joyLeft.getRawAxis(driveAxisX);
-		joystickValue = scaleJoystick(joystickValue);
-		return 0.6 * joystickValue; // Scale turning to be 60% the speed of driving for better control
-	}	
-	private double scaleJoystick(double joystickValue) {
 		joystickValue *= CURRENT_DRIVE_SCALE;
-		return joystickValue;
-	}
+		return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond;
+	}	
 
 	/** Methods for scaling drivetrain speeds *******************************************/
 	public void setNormalScale() {
