@@ -30,13 +30,13 @@ public class SwerveModule {
 
     private final CANCoder absoluteEncoder;
     private final boolean absoluteEncoderReversed;
-    private final double absoluteEncoderOffsetRad;
+    private final double absoluteEncoderOffsetDegrees;
 
     // Construct a new "SwerveModule" object (this method is the constructor)
     public SwerveModule(int driveMotorId, int turningMotorId, boolean driveMotorReversed, boolean turningMotorReversed,
                         int absoluteEncoderId, double absoluteEncoderOffset, boolean absoluteEncoderReversed) {
 
-        this.absoluteEncoderOffsetRad = absoluteEncoderOffset;
+        this.absoluteEncoderOffsetDegrees = absoluteEncoderOffset;
         this.absoluteEncoderReversed = absoluteEncoderReversed;
         absoluteEncoder = new CANCoder(absoluteEncoderId);
 
@@ -71,6 +71,7 @@ public class SwerveModule {
         turningPidController = new PIDController(RobotMap.kP_Turning, 0, 0); // There is no need for an I term or D term, the P term is enough on its own! :)
         turningPidController.enableContinuousInput(-Math.PI, Math.PI);
 
+        absoluteEncoder.configMagnetOffset(absoluteEncoderOffsetDegrees);
         resetEncoders();
     }
 
@@ -94,12 +95,12 @@ public class SwerveModule {
         angle *= (Math.PI / 180); // Convert degrees to radians
         return angle * (absoluteEncoderReversed ? -1.0 : 1.0); // Multiply by -1 if the encoder is reversed
     }
-
+    // Configure the CANcoder offset in degrees
     public void configOffset(double degrees) {
         absoluteEncoder.configMagnetOffset(degrees);
     }
 
-    // Reset the encoders
+    // Reset the encoders to their starting positions
     public void resetEncoders() {
         driveEncoder.setPosition(0);
         turningEncoder.setPosition(getAbsoluteEncoderRadians());

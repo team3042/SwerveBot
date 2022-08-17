@@ -29,7 +29,7 @@ public class Drivetrain extends SubsystemBase {
 		RobotMap.kFrontLeftDriveEncoderReversed,
 		RobotMap.kFrontLeftTurningEncoderReversed,
 		RobotMap.kFrontLeftDriveAbsoluteEncoderPort,
-		RobotMap.kFrontLeftDriveAbsoluteEncoderOffsetRad,
+		RobotMap.kFrontLeftDriveAbsoluteEncoderOffsetDegrees,
 		RobotMap.kFrontLeftDriveAbsoluteEncoderReversed);
 	private final SwerveModule frontRight = new SwerveModule(
 		RobotMap.kFrontRightDriveMotorPort,
@@ -37,7 +37,7 @@ public class Drivetrain extends SubsystemBase {
 		RobotMap.kFrontRightDriveEncoderReversed,
 		RobotMap.kFrontRightTurningEncoderReversed,
 		RobotMap.kFrontRightDriveAbsoluteEncoderPort,
-		RobotMap.kFrontRightDriveAbsoluteEncoderOffsetRad,
+		RobotMap.kFrontRightDriveAbsoluteEncoderOffsetDegrees,
 		RobotMap.kFrontRightDriveAbsoluteEncoderReversed);
 	private final SwerveModule backLeft = new SwerveModule(
 		RobotMap.kBackLeftDriveMotorPort,
@@ -45,7 +45,7 @@ public class Drivetrain extends SubsystemBase {
 		RobotMap.kBackLeftDriveEncoderReversed,
 		RobotMap.kBackLeftTurningEncoderReversed,
 		RobotMap.kBackLeftDriveAbsoluteEncoderPort,
-		RobotMap.kBackLeftDriveAbsoluteEncoderOffsetRad,
+		RobotMap.kBackLeftDriveAbsoluteEncoderOffsetDegrees,
 		RobotMap.kBackLeftDriveAbsoluteEncoderReversed);
 	private final SwerveModule backRight = new SwerveModule(
 		RobotMap.kBackRightDriveMotorPort,
@@ -53,7 +53,7 @@ public class Drivetrain extends SubsystemBase {
 		RobotMap.kBackRightDriveEncoderReversed,
 		RobotMap.kBackRightTurningEncoderReversed,
 		RobotMap.kBackRightDriveAbsoluteEncoderPort,
-		RobotMap.kBackRightDriveAbsoluteEncoderOffsetRad,
+		RobotMap.kBackRightDriveAbsoluteEncoderOffsetDegrees,
 		RobotMap.kBackRightDriveAbsoluteEncoderReversed);
 
 	private static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(RobotMap.kMAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND, RobotMap.kMAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED);

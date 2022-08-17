@@ -39,22 +39,22 @@ public class RobotMap {
     public static final boolean kFrontLeftDriveEncoderReversed = false;
     public static final boolean kFrontLeftTurningEncoderReversed = false;
 	public static final boolean kFrontLeftDriveAbsoluteEncoderReversed = false;
-    public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = 0; //TODO: Measure this offset on the physical SwerveBot after it is built
+    public static final double kFrontLeftDriveAbsoluteEncoderOffsetDegrees = 0; //TODO: Determine this offset on the physical SwerveBot
     
     public static final boolean kFrontRightDriveEncoderReversed = false;
     public static final boolean kFrontRightTurningEncoderReversed = false;
 	public static final boolean kFrontRightDriveAbsoluteEncoderReversed = false;
-    public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = 0; //TODO: Measure this offset on the physical SwerveBot after it is built
+    public static final double kFrontRightDriveAbsoluteEncoderOffsetDegrees = 0; //TODO: Determine this offset on the physical SwerveBot
     
     public static final boolean kBackLeftDriveEncoderReversed = false;
 	public static final boolean kBackLeftTurningEncoderReversed = false;
 	public static final boolean kBackLeftDriveAbsoluteEncoderReversed = false;
-    public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = 0; //TODO: Measure this offset on the physical SwerveBot after it is built
+    public static final double kBackLeftDriveAbsoluteEncoderOffsetDegrees = 0; //TODO: Determine this offset on the physical SwerveBot
     
     public static final boolean kBackRightDriveEncoderReversed = false;
     public static final boolean kBackRightTurningEncoderReversed = false;
 	public static final boolean kBackRightDriveAbsoluteEncoderReversed = false;
-    public static final double kBackRightDriveAbsoluteEncoderOffsetRad = 0; //TODO: Measure this offset on the physical SwerveBot after it is built
+    public static final double kBackRightDriveAbsoluteEncoderOffsetDegrees = 0; //TODO: Determine this offset on the physical SwerveBot
 
 	/** Swerve Module Settings ************************************************/
 	public static final double kWheelDiameterMeters = Units.inchesToMeters(4); // Convert wheel diameter in inches to meters
