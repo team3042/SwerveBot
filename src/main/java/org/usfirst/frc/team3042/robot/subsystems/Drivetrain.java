@@ -4,6 +4,7 @@ import org.usfirst.frc.team3042.lib.Log;
 import org.usfirst.frc.team3042.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -86,15 +87,12 @@ public class Drivetrain extends SubsystemBase {
     	gyroscope.reset();
 	}
 	public double getGyroAngle() { // Returns the heading of the robot
-		return gyroscope.getAngle();
-	}
-	public double getTurnRate() { // Returns the turn rate of the robot
-		return -gyroscope.getRate();
+		return Math.IEEEremainder(gyroscope.getAngle(), 360); // Make value between -180 and 180
 	}
 
 	/** Odometry Methods *******************************************************/
 	public Rotation2d getRotation2d() {
-		return Rotation2d.fromDegrees(gyroscope.getAngle());
+		return Rotation2d.fromDegrees(getGyroAngle());
 	}
 	public void resetOdometry(Pose2d pose) {
 		odometry.resetPosition(pose, this.getRotation2d());
@@ -111,6 +109,7 @@ public class Drivetrain extends SubsystemBase {
 
 	@Override
 	public void periodic() {
+		SmartDashboard.putNumber("Gyro Angle", getGyroAngle()); // The current gyroscope angle
 		odometry.update(this.getRotation2d(), frontLeft.getState(), frontRight.getState(), backLeft.getState(), backRight.getState());
 	}
 

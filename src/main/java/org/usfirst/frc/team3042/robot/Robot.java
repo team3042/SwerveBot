@@ -114,14 +114,12 @@ public class Robot extends TimedRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}  
-		goalAngle = drivetrain.getGyroAngle();
 	}
 
 	/** teleopPeriodic ********************************************************
 	 * This function is called periodically during operator control */
 	public void teleopPeriodic() {
 		CommandScheduler.getInstance().run();
-		SmartDashboard.putNumber("Gyro Angle", drivetrain.getGyroAngle()); // The current gyroscope angle
 		       
         SmartDashboard.putString("BackLeft State", drivetrain.getBackLeft().getState().toString());
 		SmartDashboard.putString("FrontLeft State", drivetrain.getFrontLeft().getState().toString());
