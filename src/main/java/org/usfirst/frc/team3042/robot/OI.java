@@ -49,7 +49,7 @@ public class OI {
 		joyRight.button1.whenPressed(new InstantCommand(this::toggleScale)); // Toggle into slow driving mode
 		joyRight.button1.whenReleased(new InstantCommand(this::toggleScale)); // Toggle out of slow driving mode
 		
-		joyLeft.button4.whenPressed(new Drivetrain_XStance());
+		gamepad.X.whenPressed(new Drivetrain_XStance());
 	}
 	
 	/** Access to the driving axes values *****************************
