@@ -17,13 +17,10 @@ public class OI {
 	private static final int JOYSTICK_X_AXIS = Gamepad.JOY_X_AXIS;
 	private static final int JOYSTICK_Y_AXIS = Gamepad.JOY_Y_AXIS;
 	private static final int JOYSTICK_Z_AXIS = Gamepad.JOY_Z_AXIS;
-	private static final double JOYSTICK_DRIVE_SCALE = RobotMap.JOYSTICK_DRIVE_SCALE;
-	private static final double JOYSTICK_DRIVE_SCALE_LOW = RobotMap.JOYSTICK_DRIVE_SCALE_LOW;
 	
 	/** Instance Variables ****************************************************/
 	Log log = new Log(RobotMap.LOG_OI, "OI");
 	public static Gamepad gamepad, joyLeft, joyRight;
-	public static double CURRENT_DRIVE_SCALE = JOYSTICK_DRIVE_SCALE;
 	public static boolean isLowScale = false;
 
 	Drivetrain drivetrain = Robot.drivetrain;
@@ -46,8 +43,6 @@ public class OI {
 		driveAxisZ = JOYSTICK_Z_AXIS;
 
 		joyLeft.button1.whenPressed(new InstantCommand(drivetrain::zeroGyro, drivetrain)); // Zero the gyro, this is helpful for field-oriented driving
-		joyRight.button1.whenPressed(new InstantCommand(this::toggleScale)); // Toggle into slow driving mode
-		joyRight.button1.whenReleased(new InstantCommand(this::toggleScale)); // Toggle out of slow driving mode
 		
 		gamepad.X.whenPressed(new Drivetrain_XStance());
 	}
@@ -56,35 +51,14 @@ public class OI {
 	 * A negative can be added to make pushing forward positive/negative. */
 	public double getXSpeed() {
 		double joystickValue = joyRight.getRawAxis(driveAxisY);
-		joystickValue *= CURRENT_DRIVE_SCALE;
 		return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond;
 	}
 	public double getYSpeed() {
 		double joystickValue = joyRight.getRawAxis(driveAxisX);
-		joystickValue *= CURRENT_DRIVE_SCALE;
 		return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond;
 	}
 	public double getZSpeed() {
 		double joystickValue = joyLeft.getRawAxis(driveAxisX);
-		joystickValue *= CURRENT_DRIVE_SCALE;
 		return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond;
-	}	
-
-	/** Methods for scaling drivetrain speeds *******************************************/
-	public void setNormalScale() {
-    	CURRENT_DRIVE_SCALE = JOYSTICK_DRIVE_SCALE;
-    	isLowScale = false;
-    }
-    public void setLowScale() {
-    	CURRENT_DRIVE_SCALE = JOYSTICK_DRIVE_SCALE_LOW;
-    	isLowScale = true;
-    }	
-	public void toggleScale(){
-    	if (isLowScale) {
-    		setNormalScale();
-    	}
-    	else {
-    		setLowScale();
-		}
 	}	
 }

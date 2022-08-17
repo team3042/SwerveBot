@@ -26,8 +26,6 @@ public class RobotMap {
 	public static final int kBackRightDriveAbsoluteEncoderPort = 12;
 
 	/** Drivetrain Settings ***************************************************/
-	public static final double JOYSTICK_DRIVE_SCALE = 1; // Determines the max driving speed of the robot
-	public static final double JOYSTICK_DRIVE_SCALE_LOW = 0.2; // Determines driving speed of the robot when in slow mode
 	public static final double VELOCITY_MAX_MPS = 4;
 	public static final double ACCELERATION_MAX_MPS = 2;
 	public static final double kP_X_CONTROLLER = 9.6421; // TODO: Find this value by characterizing the drivetrain with SysID, and then by using guess & check afterwards
