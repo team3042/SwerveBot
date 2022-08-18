@@ -65,8 +65,8 @@ public class RobotMap {
 	public static final double kPhysicalMaxSpeedMetersPerSecond = Units.feetToMeters(14); // Convert max speed from feet/sec to meters/sec
 	public static final double kP_Turning = 0.4; // TODO: We need to tune this value through testing!
 	public static final double nominalVoltage = 12.0;
-    public static final double driveCurrentLimit = 80.0;
-    public static final double steerCurrentLimit = 20.0;
+    public static final int driveCurrentLimit = 80;
+    public static final int steerCurrentLimit = 20;
 	
 	/** Drivetrain Gyro Drive Settings ****************************************/
 	public static final double kP_GYRO = 0.01;
