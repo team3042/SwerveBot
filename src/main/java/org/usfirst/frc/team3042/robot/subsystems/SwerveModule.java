@@ -92,10 +92,6 @@ public class SwerveModule {
         angle *= (Math.PI / 180); // Convert degrees to radians
         return angle * (absoluteEncoderReversed ? -1.0 : 1.0); // Multiply by -1 if the encoder is reversed
     }
-    // Configure the CANcoder offset in degrees
-    public void configOffset(double degrees) {
-        absoluteEncoder.configMagnetOffset(degrees);
-    }
 
     // Reset the encoders to their starting positions
     public void resetEncoders() {
