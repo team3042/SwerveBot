@@ -87,7 +87,7 @@ public class Drivetrain extends SubsystemBase {
     	gyroscope.reset();
 	}
 	public double getGyroAngle() { // Returns the heading of the robot
-		return Math.IEEEremainder(gyroscope.getAngle(), 360); // Make value between -180 and 180
+		return Math.IEEEremainder(gyroscope.getAngle(), 360); // Force the value between -180 and 180
 	}
 
 	/** Odometry Methods *******************************************************/
