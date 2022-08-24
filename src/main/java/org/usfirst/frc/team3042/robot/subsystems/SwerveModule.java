@@ -39,6 +39,8 @@ public class SwerveModule {
         this.absoluteEncoderReversed = absoluteEncoderReversed;
         absoluteEncoder = new CANCoder(absoluteEncoderId);
 
+        absoluteEncoder.configMagnetOffset(absoluteEncoderOffsetDegrees);
+
         driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless);
         turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);
 
@@ -68,7 +70,6 @@ public class SwerveModule {
         turningPidController = new PIDController(RobotMap.kP_Turning, 0, 0); // There is no need for an I term or D term, the P term is enough on its own! :)
         turningPidController.enableContinuousInput(-Math.PI, Math.PI);
 
-        absoluteEncoder.configMagnetOffset(absoluteEncoderOffsetDegrees);
         resetEncoders();
     }
 
