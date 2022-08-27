@@ -55,7 +55,7 @@ public class OI {
 			return 0.0;
 		}
 		else {
-			return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond;
+			return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond * -1;
 		}	
 	}
 	public double getYSpeed() {
@@ -64,7 +64,7 @@ public class OI {
 			return 0.0;
 		}
 		else {
-			return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond;
+			return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond * -1;
 		}	
 	}
 	public double getZSpeed() {
