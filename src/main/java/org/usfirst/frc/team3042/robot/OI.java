@@ -73,7 +73,7 @@ public class OI {
 			return 0.0;
 		}
 		else {
-			return joystickValue * Math.PI * 3;
+			return joystickValue * Math.PI * -3;
 		}	
 	}	
 }
