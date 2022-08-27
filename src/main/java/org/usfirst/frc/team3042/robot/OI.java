@@ -44,7 +44,7 @@ public class OI {
 
 		joyLeft.button1.whenPressed(new InstantCommand(drivetrain::zeroGyro, drivetrain)); // Zero the gyro, this is helpful for field-oriented driving
 		
-		gamepad.X.whenPressed(new Drivetrain_XStance());
+		joyRight.button1.whenPressed(new Drivetrain_XStance());
 	}
 	
 	/** Access to the driving axes values *****************************

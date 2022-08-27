@@ -14,15 +14,12 @@ public class Drivetrain_GyroTurn extends CommandBase {
 	/** Configuration Constants ***********************************************/
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN;
 	private static final double kP = RobotMap.kP_GYRO;
-	private static final double kI = RobotMap.kI_GYRO;
-	private static final double kD = RobotMap.kD_GYRO;
 	private static final double ANGLE_TOLERANCE = RobotMap.ANGLE_TOLERANCE;
-	private static final double MAX_POWER = RobotMap.MAX_POWER_GYRO;
 	
 	/** Instance Variables ****************************************************/
 	Drivetrain drivetrain = Robot.drivetrain;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(drivetrain));
-	double lastError, integralError, goalAngle;
+	double goalAngle, lastError;
 	
 	/** Drivetrain Gyro Turn ************************************************** 
 	 * Required subsystems will cancel commands when this command is run.
@@ -41,8 +38,6 @@ public class Drivetrain_GyroTurn extends CommandBase {
 	public void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
 		drivetrain.stopModules();
-		lastError = 0.0;
-		integralError = 0.0;
 		drivetrain.zeroGyro();
 	}
 
@@ -50,17 +45,11 @@ public class Drivetrain_GyroTurn extends CommandBase {
 	 * Called repeatedly when this Command is scheduled to run */
 	public void execute() {
 		double error = goalAngle - drivetrain.getGyroAngle();
-		integralError += error;
-		double deltaError = error - lastError;
 		
-		double Pterm = kP * error;
-		double Iterm = kI * integralError;
-		double Dterm = kD * deltaError;
-		
-		double correction = Pterm + Iterm + Dterm;
-		
-		correction = Math.min(MAX_POWER, correction);
-		correction = Math.max(-MAX_POWER, correction);
+		double correction = kP * error;
+				
+		correction = Math.min(1, correction);
+		correction = Math.max(-1, correction);
 	
 		drivetrain.drive(0, 0, -1 * correction, false);		
 		

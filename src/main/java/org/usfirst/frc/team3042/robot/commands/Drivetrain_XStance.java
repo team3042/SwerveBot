@@ -20,10 +20,10 @@ public class Drivetrain_XStance extends CommandBase {
 	Drivetrain drivetrain = Robot.drivetrain;
 	Log log = new Log(LOG_LEVEL, SendableRegistry.getName(drivetrain));
 
-	SwerveModuleState FrontLeftState = new SwerveModuleState(0, Rotation2d.fromDegrees(-45));
-	SwerveModuleState FrontRightState = new SwerveModuleState(0, Rotation2d.fromDegrees(45));
-	SwerveModuleState BackLeftState = new SwerveModuleState(0, Rotation2d.fromDegrees(45));
-	SwerveModuleState BackRightState = new SwerveModuleState(0, Rotation2d.fromDegrees(-45));
+	SwerveModuleState FrontLeftState = new SwerveModuleState(0, Rotation2d.fromDegrees(45));
+	SwerveModuleState FrontRightState = new SwerveModuleState(0, Rotation2d.fromDegrees(-45));
+	SwerveModuleState BackLeftState = new SwerveModuleState(0, Rotation2d.fromDegrees(-45));
+	SwerveModuleState BackRightState = new SwerveModuleState(0, Rotation2d.fromDegrees(45));
 	
 	/** Drivetrain Gyro Straight **********************************************
 	 * Required subsystems will cancel commands when this command is run */
@@ -37,11 +37,6 @@ public class Drivetrain_XStance extends CommandBase {
 	public void initialize() {
 		log.add("Initialize", Log.Level.TRACE);
 		drivetrain.stopModules();
-
-		drivetrain.getFrontLeft().setDesiredState(FrontLeftState, true);
-		drivetrain.getFrontRight().setDesiredState(FrontRightState, true);
-		drivetrain.getBackLeft().setDesiredState(BackLeftState, true);
-		drivetrain.getBackRight().setDesiredState(BackRightState, true);
 	}
 
 	/** execute ***************************************************************

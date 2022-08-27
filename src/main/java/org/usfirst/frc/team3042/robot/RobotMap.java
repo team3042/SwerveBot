@@ -69,11 +69,8 @@ public class RobotMap {
     public static final int steerCurrentLimit = 20;
 	
 	/** Drivetrain Gyro Drive Settings ****************************************/
-	public static final double kP_GYRO = 0.01;
-	public static final double kI_GYRO = 0.0;
-	public static final double kD_GYRO = 0.015;
+	public static final double kP_GYRO = 0.005;
 	public static final double ANGLE_TOLERANCE = 2.0;
-	public static final double MAX_POWER_GYRO = 0.4;
 	
 	/** USB ports *************************************************************/					
 	public static final int USB_JOYSTICK_LEFT 	= 0;

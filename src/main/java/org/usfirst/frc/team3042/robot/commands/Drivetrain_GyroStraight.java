@@ -15,7 +15,6 @@ public class Drivetrain_GyroStraight extends CommandBase {
 	private static final Log.Level LOG_LEVEL = RobotMap.LOG_DRIVETRAIN;
 	private static final double kP = RobotMap.kP_GYRO;
 	private static final double CIRCUMFRENCE = RobotMap.kWheelDiameterMeters * Math.PI;
-	private static final double MAX_CORRECTION = RobotMap.MAX_POWER_GYRO;
 	
 	/** Instance Variables ****************************************************/
 	Drivetrain drivetrain = Robot.drivetrain;
@@ -58,8 +57,8 @@ public class Drivetrain_GyroStraight extends CommandBase {
 		
 		double correction = kP * error;
 
-		correction = Math.min(MAX_CORRECTION, correction);
-		correction = Math.max(-MAX_CORRECTION, correction);
+		correction = Math.min(1, correction);
+		correction = Math.max(-1, correction);
 		
 		drivetrain.drive(forwardSpeed, sideSpeed, -1 * correction, false);
 	}

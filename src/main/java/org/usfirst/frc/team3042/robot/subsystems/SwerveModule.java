@@ -107,12 +107,13 @@ public class SwerveModule {
 
     // Set the currently desired SwerveModuleState
     public void setDesiredState(SwerveModuleState state, boolean xStance) {
-        if (!xStance && Math.abs(state.speedMetersPerSecond) < 0.001) {
+        state = SwerveModuleState.optimize(state, getState().angle);
+
+        if (!xStance && Math.abs(state.speedMetersPerSecond) < 0.01) {
             stop();
             return;
         }
 
-        state = SwerveModuleState.optimize(state, getState().angle);
         driveMotor.setVoltage(state.speedMetersPerSecond / RobotMap.kPhysicalMaxSpeedMetersPerSecond * RobotMap.nominalVoltage);
         turningMotor.set(turningPidController.calculate(getTurningPosition(), state.angle.getRadians()));
     }

@@ -130,7 +130,7 @@ public class Robot extends TimedRobot {
 		double xSpeed = oi.getXSpeed();
 		double zSpeed = oi.getZSpeed();
 
-		drivetrain.drive(xSpeed, ySpeed, zSpeed, false);
+		drivetrain.drive(xSpeed, ySpeed, zSpeed, true);
 	} 
 
 	public static SequentialCommandGroup constructTrajectoryCommand(String pathName, double velocityMax, double accelMax) { // Give this a path name and it will return a PPSwerveControllerCommand for that path :)
