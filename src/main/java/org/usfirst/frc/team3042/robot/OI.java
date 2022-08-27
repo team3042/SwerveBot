@@ -73,7 +73,7 @@ public class OI {
 			return 0.0;
 		}
 		else {
-			return joystickValue * RobotMap.kPhysicalMaxSpeedMetersPerSecond;
+			return joystickValue * Math.PI * 3;
 		}	
 	}	
 }
